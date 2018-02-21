@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web-control-panel:
+    image: majormjr/factorio-server-manager
+    ports:
+      - "8086:80"
+      - "443:443"
+      - "34197:34197/udp"
+
+  factorio-server:
+    image: dtandersen/factorio:0.16.25
+    ports:
+      - "34197:34197/udp"
+      - "27015:27015/tcp"
+    volumes:
+      - "./:/factorio"
+    deploy:
+      restart_policy:
+        condition: any
